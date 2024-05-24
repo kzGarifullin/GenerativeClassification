@@ -1,0 +1,7 @@
+torch
+torchvision
+transformers
+numpy
+diffusers
+tqdm
+jax
