@@ -5,23 +5,26 @@ from torch.utils.data import DataLoader, Dataset, Subset
 from tqdm import tqdm
 from torchvision import transforms, datasets
 from torch import nn, optim
+from accelerate import Accelerator
+from generativeClassification.vqvae import Model
 import argparse
 
-
-PTH = 'conv_vae_cifar.pth'
+PTH = 'vqvae_cifar.pth'
 DEVICE = 'cuda'
 SIZE_PER_CLASS = 2
 EPOCHS = 90
-HEAD = 'Lin'
-DATASET = 'CIFAR10'
+HEAD = 'NonLin'
 NUM_CLASSES = 10
+DATASET = 'CIFAR10'
 
 activations_encoder = {
     'layer1' : None,
     'layer2' : None,
     'layer3' : None,
     'layer4' : None,
-    'layer5': None
+    'layer5': None,
+    'layer6': None,
+    'layer7': None
 }
 
 activations_decoder = {
@@ -29,6 +32,7 @@ activations_decoder = {
     'layer2' : None,
     'layer3' : None,
     'layer4' : None,
+    'layer5' : None,
     'layer5' : None,
 }
 
@@ -61,22 +65,11 @@ def transform_to_features(activations, batch_size):
         torch.cuda.empty_cache()
     return feats
 
-def split(dataset, num_train_per_class, num_test_per_class):
-    train_indices = []
-    test_indices = []
-    for i in range(NUM_CLASSES):
-        # print(torch.tensor(dataset.targets) == i)
-        indices = torch.where(torch.tensor(dataset.targets) == i)[0].tolist()
-        train_indices.extend(indices[:num_train_per_class])
-        test_indices.extend(indices[num_train_per_class:num_train_per_class+num_test_per_class])
-    return train_indices, test_indices
-
-
 def train_model(train_loader, model, criterion, optimizer, model_vae, activations, epochs=90, loss_list=[], device='mps'):
     if activations == 'encoder':
-      activations = activations_encoder
+        activations = activations_encoder
     elif activations == 'decoder':
-      activations = activations_decoder
+        activations = activations_decoder
 
     model.train()
     loss_list = []
@@ -89,11 +82,11 @@ def train_model(train_loader, model, criterion, optimizer, model_vae, activation
                 model_vae(images)
             # print(activations_decoder['layer1'].shape)
             if activations != 'mix':
-              features_enc = transform_to_features(activations, labels.shape[0])
+                features_enc = transform_to_features(activations, labels.shape[0])
             else:
-              features_enc = transform_to_features(activations_encoder, labels.shape[0])
-              features_dec = transform_to_features(activations_decoder, labels.shape[0])
-              features_enc = torch.cat((features_enc, features_dec), dim=1)
+                features_enc = transform_to_features(activations_encoder, labels.shape[0])
+                features_dec = transform_to_features(activations_decoder, labels.shape[0])
+                features_enc = torch.cat((features_enc, features_dec), dim=1)
 
             # print(features_enc)
             features_enc = features_enc.to(device)
@@ -112,9 +105,9 @@ def train_model(train_loader, model, criterion, optimizer, model_vae, activation
 
 def test_model(model, test_loader, model_vae, activations, device='mps'):
     if activations == 'encoder':
-      activations = activations_encoder
+        activations = activations_encoder
     elif activations == 'decoder':
-      activations = activations_decoder
+        activations = activations_decoder
 
     model.eval()
     correct = 0
@@ -125,11 +118,11 @@ def test_model(model, test_loader, model_vae, activations, device='mps'):
             with torch.no_grad():
                 model_vae(images)
             if activations != 'mix':
-              features_enc = transform_to_features(activations, labels.shape[0])
+                features_enc = transform_to_features(activations, labels.shape[0])
             else:
-              features_enc = transform_to_features(activations_encoder, labels.shape[0])
-              features_dec = transform_to_features(activations_decoder, labels.shape[0])
-              features_enc = torch.cat((features_enc, features_dec), dim=1)
+                features_enc = transform_to_features(activations_encoder, labels.shape[0])
+                features_dec = transform_to_features(activations_decoder, labels.shape[0])
+                features_enc = torch.cat((features_enc, features_dec), dim=1)
 
             features_enc.to(device)
 
@@ -142,76 +135,84 @@ def test_model(model, test_loader, model_vae, activations, device='mps'):
     print(f"Accuracy: {accuracy}%")
     return accuracy
 
+def split(dataset, num_train_per_class, num_test_per_class):
+    train_indices = []
+    test_indices = []
+    for i in range(NUM_CLASSES):
+        # print(torch.tensor(dataset.targets) == i)
+        indices = torch.where(torch.tensor(dataset.targets) == i)[0].tolist()
+        train_indices.extend(indices[:num_train_per_class])
+        test_indices.extend(indices[num_train_per_class:num_train_per_class+num_test_per_class])
+    return train_indices, test_indices
+
 def main():
-    device = DEVICE
+    accelerator = Accelerator()
+    model = Model()
+    model.load_state_dict(torch.load(PTH, map_location=torch.device(accelerator.device)))
 
-    BATCH_SIZE = 128
-    EPOCHS = 100
-    LR = 0.3*1e-3
-    N_LATENS = 512
-    BETA = 1
+    model.conv1.register_forward_hook(get_activation_foo('layer1', activations_encoder))
+    model.conv2.register_forward_hook(get_activation_foo('layer2', activations_encoder))
+    model.conv3.register_forward_hook(get_activation_foo('layer3', activations_encoder))
+    model.resblock1.layers[0].register_forward_hook(get_activation_foo('layer4', activations_encoder))
+    model.resblock1.layers[1].register_forward_hook(get_activation_foo('layer5', activations_encoder))
+    model.resblock1.layers[2].register_forward_hook(get_activation_foo('layer6', activations_encoder))
+    model.vq_conv.register_forward_hook(get_activation_foo('layer7', activations_encoder))
 
-    model = vae_cifar.ConvVAE((3, 32, 32), N_LATENS, BETA, device=device).to(device)
-    model.load_state_dict(torch.load(PTH, map_location=device))
-
-    model.encoder.model[3].register_forward_hook(get_activation_foo('layer1', activations_encoder))
-    model.encoder.model[6].register_forward_hook(get_activation_foo('layer2', activations_encoder))
-    model.encoder.model[9].register_forward_hook(get_activation_foo('layer3', activations_encoder))
-    model.encoder.model[12].register_forward_hook(get_activation_foo('layer4', activations_encoder))
-    model.encoder.model[14].register_forward_hook(get_activation_foo('layer5', activations_encoder))
-
-    model.decoder.model[0].register_forward_hook(get_activation_foo_input('layer1', activations_decoder))
-    model.decoder.model[4].register_forward_hook(get_activation_foo_input('layer2', activations_decoder))
-    model.decoder.model[8].register_forward_hook(get_activation_foo_input('layer3', activations_decoder))
-    model.decoder.model[12].register_forward_hook(get_activation_foo_input('layer4', activations_decoder))
-    model.decoder.model[16].register_forward_hook(get_activation_foo_input('layer5', activations_decoder))
+    model.conv4.register_forward_hook(get_activation_foo_input('layer1', activations_decoder))
+    model.resblock2.layers[0].register_forward_hook(get_activation_foo_input('layer2', activations_decoder))
+    model.resblock2.layers[1].register_forward_hook(get_activation_foo_input('layer3', activations_decoder))
+    model.resblock2.layers[2].register_forward_hook(get_activation_foo_input('layer4', activations_decoder))
+    model.conv5.register_forward_hook(get_activation_foo_input('layer5', activations_decoder))
+    model.conv6.register_forward_hook(get_activation_foo_input('layer6', activations_decoder))
 
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))  # Normalize the images to [-1, 1]
+        transforms.Normalize((0.5071, 0.4865, 0.4409), (0.2673, 0.2564, 0.2762))
     ])
 
     train_dataset = None
     test_dataset = None
-    if DATASET == 'CIFAR10':
-        train_dataset = datasets.CIFAR10(root='./data', train=True,
-                                        download=True, transform=transform)
-
-        test_dataset = datasets.CIFAR10(root='./data', train=False,
-                                        download=True, transform=transform)
-        NUM_CLASSES = 10
-    else:
-        train_dataset = datasets.CIFAR100(root='./data', train=True,
-                                         download=True, transform=transform)
-
-        test_dataset = datasets.CIFAR100(root='./data', train=False,
-                                        download=True, transform=transform)
+    if DATASET == 'CIFAR100':
+        train_dataset = datasets.CIFAR100(root='./data', train=True, download=True, transform=transform)
+        test_dataset = datasets.CIFAR100(root='./data', train=False, download=True, transform=transform)
         NUM_CLASSES = 100
+    else:
+        train_dataset = datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
+        test_dataset = datasets.CIFAR10(root='./data', train=False, download=True, transform=transform)
+        NUM_CLASSES = 10
 
-    train_indices, test_indices = split(train_dataset, num_train_per_class=SIZE_PER_CLASS, num_test_per_class=SIZE_PER_CLASS)
+    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
+
+    train_indices, _ = split(train_dataset, num_train_per_class=SIZE_PER_CLASS, num_test_per_class=SIZE_PER_CLASS)
 
     train_subset = Subset(train_dataset, train_indices)
-    # test_subset = Subset(train_dataset, test_indices)
-    # print(train_subset)
+    train_sub_loader = DataLoader(train_subset, batch_size=64, shuffle=False)
 
-    train_loader = DataLoader(train_subset, batch_size=32, shuffle=True)
-    test_loader = DataLoader(test_dataset, batch_size=32)
+    test_iter = iter(test_loader)
+    cur_iter = next(test_iter)
 
-    input_size = 992 + 1504
+    model(cur_iter[0][:4])[1].cpu().detach()
+
+    num_encoder_features = transform_to_features(activations_encoder, 64).shape[1]
+    num_decoder_features = transform_to_features(activations_decoder, 64).shape[1]
+    num_all_features = num_encoder_features + num_decoder_features
+
     num_classes = NUM_CLASSES
 
     linModel = None
     if HEAD == 'NonLin':
-        linModel = Net(input_size, num_classes).to(device)
+        linModel = Net(num_all_features, num_classes).to(accelerator.device)
     else:
-        linModel = LinearNet(input_size, num_classes).to(device)
+        linModel = LinearNet(num_all_features, num_classes).to(accelerator.device)
+
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(linModel.parameters(), lr=0.001)
 
-    linModel.to(device)
+    linModel.to(accelerator.device)
 
-    train_model(train_loader, linModel, criterion, optimizer, model, activations='mix', epochs=EPOCHS, loss_list=[], device=device);
-    test_model(linModel, test_loader, model, activations='mix', device=device)
+    train_model(train_sub_loader, linModel, criterion, optimizer, model, activations='mix', epochs=EPOCHS, loss_list=[],
+                device=accelerator.device)
+    test_model(linModel, test_loader, model, activations='mix', device=accelerator.device)
 
 if __name__ == '__main__':
 
@@ -221,6 +222,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--size_per_class', type=int, help='Number of images per class', default=SIZE_PER_CLASS)
     parser.add_argument('-e', '--epochs', type=int, help='Number of epochs', default=EPOCHS)
     parser.add_argument('-hd', '--head', type=str, help='Type of head model: Lin or NonLin', default=HEAD)
+    parser.add_argument('-nc', '--num_classes', type=int, help='Num Classes', default=NUM_CLASSES)
     parser.add_argument('-ct', '--cifar_type', type=str, help='CIFAR10 or CIFAR100', default=DATASET)
 
     args = parser.parse_args()
@@ -229,6 +231,7 @@ if __name__ == '__main__':
     DEVICE = args.device
     SIZE_PER_CLASS = args.size_per_class
     EPOCHS = args.epochs
+    NUM_CLASSES = args.num_classes
     DATASET = args.cifar_type
 
     main()
