@@ -39,15 +39,15 @@ Features for MNIST:
 
 Features for CIFAR-10:
 
-|     Diffusion model       |          VAE        |          GAN        
+|     Diffusion model       |          VQ-VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:
-![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/umap_diffusion_cifar10.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-diff.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-VQ-VAE.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-GAN.gif)
 
 Features for CIFAR-100:
 
-|     Diffusion model       |          VAE        |          GAN        
+|     Diffusion model       |          VQ-VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:
-![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-diff.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-VQ-VAE.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-GAN.gif)
 
 
 # Results
