@@ -185,7 +185,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--device', type=str, help='Device for training', default=DEVICE)
     parser.add_argument('-s', '--size_per_class', type=int, help='Number of images per class', default=SIZE_PER_CLASS)
     parser.add_argument('-e', '--epochs', type=int, help='Number of epochs', default=EPOCHS)
-    parser.add_argument('-h', '--head', type=str, help='Type of head model: Lin or NonLin', default=HEAD)
+    parser.add_argument('-hd', '--head', type=str, help='Type of head model: Lin or NonLin', default=HEAD)
 
     args = parser.parse_args()
 

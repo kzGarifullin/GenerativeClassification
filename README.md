@@ -78,38 +78,35 @@ All experiments were performed in Google Colab. Links to all experiments:
 
 ## Scripts Usage
 
-#### VAE
-
-   ```bash
-  extract_features_train_smallnet_cifar.py [-h] [-p PATH] [-d DEVICE] [-s SIZE_PER_CLASS] [-e EPOCHS]
-options:
-  -h, --help            show this help message and exit
-  -p PATH, --path PATH  Path of weights
-  -d DEVICE, --device DEVICE
-                        Device for training
-  -s SIZE_PER_CLASS, --size_per_class SIZE_PER_CLASS
-                        Number of images per class
-  -e EPOCHS, --epochs EPOCHS
-                        Number of epochs
-   ```
+#### Train VAE/VQ-VAE
+###### MNIST VAE
 ```bash
-extract_features_train_smallnet_mnist.py [-h] [-p PATH] [-d DEVICE] [-s SIZE_PER_CLASS] [-e EPOCHS]
+    usage: train_vae_mnist.py [-h] [-d DEVICE] [-bs BATCH_SIZE] [-e EPOCHS]
+                          [-lr LR] [-ld LATENT_DIM] [-pth PATH]
 
-options:
+optional arguments:
   -h, --help            show this help message and exit
-  -p PATH, --path PATH  Path of weights
   -d DEVICE, --device DEVICE
                         Device for training
-  -s SIZE_PER_CLASS, --size_per_class SIZE_PER_CLASS
-                        Number of images per class
+  -bs BATCH_SIZE, --batch_size BATCH_SIZE
+                        Batch size
   -e EPOCHS, --epochs EPOCHS
                         Number of epochs
+  -lr LR, --lr LR       Learning rate
+  -ld LATENT_DIM, --latent_dim LATENT_DIM
+                        Laten space dimension
+  -pth PATH, --path PATH
+                        Weights path
 ```
 
- ```bash
-train_vae_cifar.py [-h] [-d DEVICE] [-bs BATCH_SIZE] [-e EPOCHS] [-lr LR] [-ld LATENT_DIM]
+###### CIFAR VAE
 
-options:
+   ```bash
+usage: train_vae_cifar.py [-h] [-d DEVICE] [-bs BATCH_SIZE] [-e EPOCHS]
+                          [-lr LR] [-ld LATENT_DIM] [-ct CIFAR_TYPE]
+                          [-pth PATH]
+
+optional arguments:
   -h, --help            show this help message and exit
   -d DEVICE, --device DEVICE
                         Device for training
@@ -120,15 +117,18 @@ options:
   -lr LR, --lr LR       Learning rate
   -ld LATENT_DIM, --latent_dim LATENT_DIM
                         Laten space dimension
- ```
+  -ct CIFAR_TYPE, --cifar_type CIFAR_TYPE
+                        CIFAR10 or CIFAR100
+  -pth PATH, --path PATH
+                        Weights path
+   ```
+###### CIFAR VQ-VAE
+```bash
+usage: train_vqvae.py [-h] [-bs BATCH_SIZE] [-e EPOCHS] [-lr LR]
+                      [-ld LATENT_DIM] [-ct CIFAR_TYPE] [-pth PATH]
 
- ```bash
-train_vae_mnist.py [-h] [-d DEVICE] [-bs BATCH_SIZE] [-e EPOCHS] [-lr LR] [-ld LATENT_DIM]
-
-options:
+optional arguments:
   -h, --help            show this help message and exit
-  -d DEVICE, --device DEVICE
-                        Device for training
   -bs BATCH_SIZE, --batch_size BATCH_SIZE
                         Batch size
   -e EPOCHS, --epochs EPOCHS
@@ -136,8 +136,80 @@ options:
   -lr LR, --lr LR       Learning rate
   -ld LATENT_DIM, --latent_dim LATENT_DIM
                         Laten space dimension
- ```
+  -ct CIFAR_TYPE, --cifar_type CIFAR_TYPE
+                        CIFAR10 or CIFAR100
+  -pth PATH, --path PATH
+                        Weights path
+```
 
+#### Extract Features From Different Models
+
+###### MNIST VAE
+```bash
+usage: extract_features_train_smallnet_mnist.py [-h] [-p PATH] [-d DEVICE]
+                                                [-s SIZE_PER_CLASS]
+                                                [-e EPOCHS] [-hd HEAD]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PATH, --path PATH  Path of weights
+  -d DEVICE, --device DEVICE
+                        Device for training
+  -s SIZE_PER_CLASS, --size_per_class SIZE_PER_CLASS
+                        Number of images per class
+  -e EPOCHS, --epochs EPOCHS
+                        Number of epochs
+  -hd HEAD, --head HEAD
+                        Type of head model: Lin or NonLin
+```
+
+###### CIFAR VAE
+```bash
+usage: extract_features_train_smallnet_cifar.py [-h] [-p PATH] [-d DEVICE]
+                                                [-s SIZE_PER_CLASS]
+                                                [-e EPOCHS] [-hd HEAD]
+                                                [-ct CIFAR_TYPE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PATH, --path PATH  Path of weights
+  -d DEVICE, --device DEVICE
+                        Device for training
+  -s SIZE_PER_CLASS, --size_per_class SIZE_PER_CLASS
+                        Number of images per class
+  -e EPOCHS, --epochs EPOCHS
+                        Number of epochs
+  -hd HEAD, --head HEAD
+                        Type of head model: Lin or NonLin
+  -ct CIFAR_TYPE, --cifar_type CIFAR_TYPE
+                        CIFAR10 or CIFAR100
+```
+
+###### CIFAR VQ-VAE
+
+```bash
+usage: extract_features_train_smallnet_vqvae.py [-h] [-p PATH] [-d DEVICE]
+                                                [-s SIZE_PER_CLASS]
+                                                [-e EPOCHS] [-hd HEAD]
+                                                [-nc NUM_CLASSES]
+                                                [-ct CIFAR_TYPE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PATH, --path PATH  Path of weights
+  -d DEVICE, --device DEVICE
+                        Device for training
+  -s SIZE_PER_CLASS, --size_per_class SIZE_PER_CLASS
+                        Number of images per class
+  -e EPOCHS, --epochs EPOCHS
+                        Number of epochs
+  -hd HEAD, --head HEAD
+                        Type of head model: Lin or NonLin
+  -nc NUM_CLASSES, --num_classes NUM_CLASSES
+                        Num Classes
+  -ct CIFAR_TYPE, --cifar_type CIFAR_TYPE
+                        CIFAR10 or CIFAR100
+```
 
 ## Developers
 - [Kamil Garifullin](https://github.com/kzGarifullin)

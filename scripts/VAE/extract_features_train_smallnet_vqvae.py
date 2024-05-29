@@ -60,9 +60,9 @@ def transform_to_features(activations, batch_size):
             cur_feat = val[-batch_size:]
             if len(val.shape) == 4:
                 cur_feat = val[-batch_size:].mean(dim=[2,3])
-            feats = torch.cat((feats, cur_feat), dim=1)
+
+            feats = torch.cat((feats.to(DEVICE), cur_feat.to(DEVICE)), dim=1)
             activations[key] = None
-        torch.cuda.empty_cache()
     return feats
 
 def train_model(train_loader, model, criterion, optimizer, model_vae, activations, epochs=90, loss_list=[], device='mps'):
@@ -125,6 +125,7 @@ def test_model(model, test_loader, model_vae, activations, device='mps'):
                 features_enc = torch.cat((features_enc, features_dec), dim=1)
 
             features_enc.to(device)
+            model.to(device)
 
             outputs = model(features_enc)
 
@@ -139,7 +140,6 @@ def split(dataset, num_train_per_class, num_test_per_class):
     train_indices = []
     test_indices = []
     for i in range(NUM_CLASSES):
-        # print(torch.tensor(dataset.targets) == i)
         indices = torch.where(torch.tensor(dataset.targets) == i)[0].tolist()
         train_indices.extend(indices[:num_train_per_class])
         test_indices.extend(indices[num_train_per_class:num_train_per_class+num_test_per_class])
@@ -185,13 +185,14 @@ def main():
 
     train_indices, _ = split(train_dataset, num_train_per_class=SIZE_PER_CLASS, num_test_per_class=SIZE_PER_CLASS)
 
+
     train_subset = Subset(train_dataset, train_indices)
     train_sub_loader = DataLoader(train_subset, batch_size=64, shuffle=False)
 
     test_iter = iter(test_loader)
     cur_iter = next(test_iter)
 
-    model(cur_iter[0][:4])[1].cpu().detach()
+    model(cur_iter[0][:4])[1].to(DEVICE).detach()
 
     num_encoder_features = transform_to_features(activations_encoder, 64).shape[1]
     num_decoder_features = transform_to_features(activations_decoder, 64).shape[1]
@@ -209,6 +210,7 @@ def main():
     optimizer = optim.Adam(linModel.parameters(), lr=0.001)
 
     linModel.to(accelerator.device)
+    model.to(accelerator.device)
 
     train_model(train_sub_loader, linModel, criterion, optimizer, model, activations='mix', epochs=EPOCHS, loss_list=[],
                 device=accelerator.device)
