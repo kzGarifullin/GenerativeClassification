@@ -64,12 +64,11 @@ GAN model outperforms the baseline model on small labeled datasets, with up to 6
 
 ## Results for the CIFAR-10 dataset
 
-![image](https://github.com/David-cripto/DiffClassification/assets/78556639/7af1b8f4-0df9-485e-b40a-d796c3ed97fb)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/cifar10_accuracy_comparison.png)
 
 ## Results for the CIFAR-100 dataset
 
-Training nonlinear (Linear+ReLU+Linear) model (since it was the best on MNIST) on features from generative models
-![image](https://github.com/David-cripto/DiffClassification/assets/78556639/f77f8155-c96a-40db-8d07-d094e0d458dd)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/cifar100_accuracy_comparison.png)
 
 ## Reproducibility of diffusion experiments
 All experiments were performed in Google Colab. Links to all experiments:
