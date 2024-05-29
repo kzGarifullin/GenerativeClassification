@@ -33,9 +33,9 @@ Assessing the **separability of features** is an important step towards evaluati
 
 Features for MNIST:
 
-|     Diffusion model       |          VAE        |          GAN        
+|     Diffusion model       |          VVAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:
-![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
+<img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png" width="350"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg" width="350"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png" width="350"/>
 
 Features for CIFAR-10:
 
@@ -48,7 +48,7 @@ Features for CIFAR-100:
 
 |     Diffusion model       |          VQ-VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:
-<img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-diff.gif" width="350"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-VQ-VAE.gif" width="350"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-GAN.gif" width="350"/>
+<img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-diff.gif" width="300"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-VQ-VAE.gif" width="300"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR100-UMAP-GAN.gif" width="300"/>
 
 
 # Results
