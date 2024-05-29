@@ -11,3 +11,5 @@ To execute the laptops, you will need:
 - `model.py`
 - `non_leaking.py`
 - `smallnet.py`
+
+These files are downloaded automatically by the script. If you encounter any issues, you can manually copy the files.
