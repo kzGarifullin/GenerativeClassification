@@ -41,7 +41,7 @@ Features for CIFAR-10:
 
 |     Diffusion model       |          VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:
-![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/umap_diffusion_cifar10.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
 
 Features for CIFAR-100:
 
