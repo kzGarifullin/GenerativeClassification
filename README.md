@@ -76,6 +76,13 @@ All experiments were performed in Google Colab. Links to all experiments:
 - [Experiment 2: diffusion_CIFAR_10.ipynb](https://colab.research.google.com/drive/1XzuW8fHn-Rt8UXylmINIvvWFwrITSPME?usp=sharing)
 - [Experiment 3: diffusion_CIFAR_100.ipynb](https://colab.research.google.com/drive/1zYfXGbr8z0Z4Lm2SY5kvc1zq-QHnb30G?usp=sharing)
 
+## Reproducibility of GAN experiments
+All experiments were performed in Google Colab. Links to all experiments:
+- [Experiment 1: GAN_mnist.ipynb](https://drive.google.com/file/d/1f80tPp4yr_jJ3O8F_awNDsdCSvZ-RsdW/view?usp=sharing)
+- [Experiment 2: GAN_CIFAR_10.ipynb](https://drive.google.com/file/d/1joUih14kU0AesRifAPtWEkT72zgwyC4q/view?usp=sharing)
+- [Experiment 3: GAN_CIFAR_100.ipynb](https://drive.google.com/file/d/1AvuGtvFTe6PErKvVyr1nhzpgm2HFxwiX/view?usp=sharing)
+
+
 ## Scripts Usage
 
 #### Train VAE/VQ-VAE
