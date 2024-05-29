@@ -41,7 +41,8 @@ Features for CIFAR-10:
 
 |     Diffusion model       |          VQ-VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:
-![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-diff.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-VQ-VAE.gif) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-GAN.png)
+<img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-diff.gif" width="150"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-VQ-VAE.gif" width="150"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR10-UMAP-GAN.png" width="150"/>
+
 
 Features for CIFAR-100:
 
