@@ -23,7 +23,9 @@ In the framework of the diffusion model for feature aggregation, the choice of t
 
 MNIST             |  CIFAR-10             |  CIFAR-100
 :-------------------------:|:-------------------------:|:-------------------------:
-![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-t-opt.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR-10-t-opt.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR-100-t-opt.png)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-t-opt.png) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR-10-t-opt.png) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR-100-t-opt.png)
 
 As evident from the plots, the optimal step values for MNIST and CIFAR-10 are $100$ and $50$, respectively. Consequently, we set these timesteps as constants for subsequent experiments.
 
@@ -35,13 +37,25 @@ Features for MNIST:
 
 | Diffusion model |  VAE |  GAN |
 |:-------------------------:|:-------------------:|:-------------------:|
-![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
 
-Features for Variational Autoencoder:
+Features for CIFAR-10:
 
-| MNIST dataset |  CIFAR-10 dataset |
-|:-------------------------:|:-------------------:|
-![image](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/mnist-features.png) | ![image](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/cifar-features.png)
+| Diffusion model |  VAE |  GAN |
+|:-------------------------:|:-------------------:|:-------------------:|
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
+
+Features for CIFAR-100:
+
+| Diffusion model |  VAE |  GAN |
+|:-------------------------:|:-------------------:|:-------------------:|
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | 
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
 
 
 # Results
