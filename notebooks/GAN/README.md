@@ -10,3 +10,4 @@ To execute the laptops, you will need:
 - `distributed_utils.py` (renamed from `distributed.py` to avoid import conflicts)
 - `model.py`
 - `non_leaking.py`
+- `smallnet.py`
