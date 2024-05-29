@@ -54,11 +54,11 @@ Features for CIFAR-100:
 
 ## MNIST Training Results
 
-Training linear (Linear) and nonlinear (Linear+ReLU+Linear) models on features from generative models
+Comparison of three generative models for feature extraction for MNIST dataset.
 
-![image](https://github.com/David-cripto/DiffClassification/assets/78556639/9397cc93-c248-461f-aace-6bbab676224d)
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-accuracy-comparison.png)
 
-![image](https://github.com/David-cripto/DiffClassification/assets/78556639/6891d2ed-2740-4f14-ac96-df0d20d093c2)
+GAN model outperforms the baseline model on small labeled datasets, with up to 64 labeled images per class. The diffusion model and VAE also show an advantage over the baseline, with improvements up to 32 and 12 labeled images per class, respectively.
 
 
 ## Models Comparison
