@@ -21,9 +21,9 @@ This approach leverages the generative model to enable the small neural network 
 ## Optimal time selection for diffusion model
 In the framework of the diffusion model for feature aggregation, the choice of the optimal diffusion time step parameter becomes paramount in determining the temporal influence of features.
 
-MNIST             |  CIFAR-10
-:-------------------------:|:-------------------------:
-![image](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/diff-mnist-step.PNG) | ![image](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/diff-cifar-step.PNG)
+MNIST             |  CIFAR-10             |  CIFAR-100
+:-------------------------:|:-------------------------:|:-------------------------:
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-t-opt.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR-10-t-opt.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/CIFAR-100-t-opt.png)
 
 As evident from the plots, the optimal step values for MNIST and CIFAR-10 are $100$ and $50$, respectively. Consequently, we set these timesteps as constants for subsequent experiments.
 
