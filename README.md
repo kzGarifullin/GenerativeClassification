@@ -52,7 +52,7 @@ Features for CIFAR-100:
 
 # Results
 
-## MNIST Training Results
+## Results for the MNIST dataset
 
 Comparison of three generative models for feature extraction for MNIST dataset.
 
@@ -61,18 +61,16 @@ Comparison of three generative models for feature extraction for MNIST dataset.
 GAN model outperforms the baseline model on small labeled datasets, with up to 64 labeled images per class. The diffusion model and VAE also show an advantage over the baseline, with improvements up to 32 and 12 labeled images per class, respectively.
 
 
-## Models Comparison
+## Results for the CIFAR-10 dataset
 
 ![image](https://github.com/David-cripto/DiffClassification/assets/78556639/7af1b8f4-0df9-485e-b40a-d796c3ed97fb)
 
-## CIFAR-10 Training Results
+## Results for the CIFAR-100 dataset
 
 Training nonlinear (Linear+ReLU+Linear) model (since it was the best on MNIST) on features from generative models
 ![image](https://github.com/David-cripto/DiffClassification/assets/78556639/f77f8155-c96a-40db-8d07-d094e0d458dd)
 
-## Models comparison
 
-![image](https://github.com/David-cripto/DiffClassification/assets/78556639/8ea8a96e-5c4a-432f-8318-522985b39130)
 
 ## Scripts Usage
 
