@@ -70,7 +70,11 @@ GAN model outperforms the baseline model on small labeled datasets, with up to 6
 Training nonlinear (Linear+ReLU+Linear) model (since it was the best on MNIST) on features from generative models
 ![image](https://github.com/David-cripto/DiffClassification/assets/78556639/f77f8155-c96a-40db-8d07-d094e0d458dd)
 
-
+## Reproducibility of diffusion experiments
+All experiments were performed in Google Colab. Links to all experiments:
+- [Experiment 1: diffclassification_for_mnist.ipynb](https://colab.research.google.com/drive/1wvdOL1PgP3yJP05GBEyTu1dVy-FKT3Wz?usp=sharing)
+- [Experiment 2: diffusion_CIFAR_10.ipynb](https://colab.research.google.com/drive/1XzuW8fHn-Rt8UXylmINIvvWFwrITSPME?usp=sharing)
+- [Experiment 3: diffusion_CIFAR_100.ipynb](https://colab.research.google.com/drive/1zYfXGbr8z0Z4Lm2SY5kvc1zq-QHnb30G?usp=sharing)
 
 ## Scripts Usage
 
@@ -135,18 +139,11 @@ options:
  ```
 
 
-#### Diffusion
 
-mnist_main.ipynb - loading pretrained weights of DDPM and feature extraction on MNIST dataset  
-
-CIFAR_10_Diffusion_new.ipynb - training DDPM and feature extraction on CIFAR-10 dataset 
-
-supervised.ipynb - training ResNet18 for comparising with small net trained on features extracted from DDPM on different train set sizes 
 
 ## Pretrained weights
 
 Pretrained VAE models: https://drive.google.com/drive/folders/1UrXq-gdDHtKQBUMxOc-oiawpqYo2ozga?usp=share_link
-
 
 Pretrained diffusion model for CIFAR-10: https://drive.google.com/file/d/1ICLWfz3Wu8cVQhJUBOcxlEuGsw6zbaFL/view?usp=drive_link
 
