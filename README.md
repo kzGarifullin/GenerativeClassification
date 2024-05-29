@@ -35,7 +35,7 @@ Assessing the **separability of features** is an important step towards evaluati
 
 Features for MNIST:
 
-| Diffusion model |  VAE |  GAN |
+|     Diffusion model       |          VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:|
 ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | 
 ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | 
@@ -43,7 +43,7 @@ Features for MNIST:
 
 Features for CIFAR-10:
 
-| Diffusion model |  VAE |  GAN |
+|     Diffusion model       |          VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:|
 ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | 
 ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | 
@@ -51,7 +51,7 @@ Features for CIFAR-10:
 
 Features for CIFAR-100:
 
-| Diffusion model |  VAE |  GAN |
+|     Diffusion model       |          VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:|
 ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | 
 ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | 
