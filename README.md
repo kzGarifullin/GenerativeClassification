@@ -33,7 +33,7 @@ Assessing the **separability of features** is an important step towards evaluati
 
 Features for MNIST:
 
-|     Diffusion model       |          VVAE        |          GAN        
+|     Diffusion model       |          VAE        |          GAN        
 |:-------------------------:|:-------------------:|:-------------------:
 <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png" width="350"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg" width="350"/> | <img src="https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png" width="350"/>
 
