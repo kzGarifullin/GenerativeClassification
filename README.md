@@ -27,25 +27,15 @@ MNIST             |  CIFAR-10             |  CIFAR-100
 
 As evident from the plots, the optimal step values for MNIST and CIFAR-10 are $100$ and $50$, respectively. Consequently, we set these timesteps as constants for subsequent experiments.
 
-## Generation Quality
-
-The efficiency of a model's generation can be directly related to its feature representation. To assess models' performance on datasets, we employed generation metrics. Specifically, we utilized the Frechet Inception Distance (FID) and Density Coverage metrics. FID measures the disparity between the distributions of generated and actual data samples in feature space, with lower FID scores indicating better performance. This metric accounts for both the accuracy and diversity of generated outputs.
-On the other hand, Density Coverage assesses a model's capability to recreate the underlying data distribution. 
-
-VAE generation             |  Diffusion generation
-:-------------------------:|:-------------------------:
-![image](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/mnist-generation-cifar.PNG) | ![image](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/mnist-generation-diff.PNG)
-
-
 ## Features Quality
 
 Assessing the **separability of features** is an important step towards evaluation of models quality in learning the internal structure of dataset. To assess visually the quality of extracted features from generative models, we implemented code to project those features in 2- and 3-dimensional spaces using Uniform Manifold Approximation and Projection, UMAP. 
 
-Features for diffusion model:
+Features for MNIST:
 
-| MNIST dataset |  CIFAR-10 dataset |
-|:-------------------------:|:-------------------:|
-![MNIST](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/diff_mnist_umap.png) | ![MNIST](https://github.com/David-cripto/DiffClassification/blob/kzGarifullin-patch-1/assets/MNIST/diff_cifar_umap.png) | 
+| Diffusion model |  VAE |  GAN |
+|:-------------------------:|:-------------------:|:-------------------:|
+![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-diff.png) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-VAE.jpeg) | ![image](https://github.com/kzGarifullin/GenerativeClassification/blob/main/images/MNIST-UMAP-GAN.png)
 
 Features for Variational Autoencoder:
 
